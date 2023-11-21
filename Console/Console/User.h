@@ -11,6 +11,9 @@ public:
 	std::string returnname();
 	std::string returnlogin();
 	std::string returnpassword();
+	void changelogin(std::string login);
+	void changename(std::string name);
+	void changepassword(std::string password);
 	void information();
 
 };

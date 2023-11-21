@@ -19,3 +19,15 @@ void User::information()
 	std::cout <<"login: "<< _login << std::endl;
 	std::cout <<"name: "<< _name << std::endl;
 }
+void User::changelogin(std::string login)
+{
+	_login = login;
+}
+void User::changename(std::string name)
+{
+	_name = name;
+}
+void User::changepassword(std::string password)
+{
+	_password = password;
+}
