@@ -6,7 +6,7 @@ private:
 	std::string _login;
 	std::string _name;
 public:
-	User(std::string login, std::string password, std::string name);
+	User(std::string password, std::string login, std::string name);
 	~User() = default;
 	std::string returnname();
 	std::string returnlogin();

@@ -1,7 +1,7 @@
 #include"User.h"
 #include<iostream>
 #include<string>
-User::User(std::string login, std::string password, std::string name) :_login(login), _password(password),_name(name) {}
+User::User(std::string password, std::string login, std::string name) :_login(login), _password(password),_name(name) {}
 std::string User::returnname()
 {
 	return _name;

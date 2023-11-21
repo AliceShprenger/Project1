@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include<string>
+#include<iostream>
 using namespace std;
 bool Listcomparename(User* A,User* B) {
 	return(A->returnname() < B->returnname());
@@ -18,6 +19,13 @@ void ListUsers::sortListname()
 void ListUsers::sortListlogin()
 {
 	sort(_List.begin(), _List.end(), Listcomparelogin);
+}
+
+void ListUsers::show()
+{
+	for (int i = 0; i < _size; i++) {
+		cout << _List[i]->returnname() << "   " << _List[i]->returnlogin() << endl;
+	}
 }
 
 int ListUsers::account_verification(string login, string password)
