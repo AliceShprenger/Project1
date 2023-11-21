@@ -1,18 +1,15 @@
 #include "ListUsers.h"
+#include "User.h"
 #include <vector>
 #include <algorithm>
+#include<string>
 using namespace std;
-bool Listcomparename(User*A,User*B) {
-	return(A->returnname() < B->returnname());
+bool Listcomparename(User A,User B) {
+	return(A.returnname() < B.returnname());
 }
-bool Listcomparelogin(User* A, User* B) {
-	return(A->returnlogin() < B->returnlogin());
+bool Listcomparelogin(User A, User B) {
+	return(A.returnlogin() < B.returnlogin());
 }
-void ListUsers::addUser(User* A)
-{
-	_List.push_back(*A);
-}
-
 void ListUsers::sortListname()
 {
 	sort(_List.begin(), _List.end(), Listcomparename);
@@ -22,3 +19,20 @@ void ListUsers::sortListlogin()
 {
 	sort(_List.begin(), _List.end(), Listcomparelogin);
 }
+
+bool ListUsers::account_verification(string login, string password)
+{
+	for (int i = 0; i < _size; i++)
+	{
+		if (login == _List[i].returnlogin() and password == _List[i].returnpassword()) return 1;
+	}
+	return 0;
+}
+
+void ListUsers::register_(string passw, string login, string name)
+{
+	User B(passw, login, name);
+	_List.push_back(B);
+	_size++;
+}
+
