@@ -4,13 +4,13 @@
 #include"User.h"
 class ListUsers {
 private:
-	std::vector<User> _List;
-	int _size;
 public:
+	std::vector<User*> _List;
+	int _size;
 	ListUsers()=default;
 	~ListUsers() = default;
 	void sortListname();
 	void sortListlogin();
-	bool account_verification(std::string login,std::string password);
+	int account_verification(std::string login,std::string password);
 	void register_(std::string passw, std::string login, std::string name);
 };

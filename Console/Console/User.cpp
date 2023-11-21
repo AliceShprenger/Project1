@@ -17,5 +17,5 @@ std::string User::returnpassword()
 void User::information()
 {
 	std::cout <<"login: "<< _login << std::endl;
-	std::cout << "name: "<< _name << std::endl;
+	std::cout <<"name: "<< _name << std::endl;
 }

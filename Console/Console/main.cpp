@@ -16,15 +16,15 @@ bool password_check(string passw) {
 	return 0;
 }
 
-void ENTER()
+int ENTER()
 {
 	while (true) {
-		cout << "log_in or sign_up: " << endl;
+		cout << "log_in or sign_up or exit" << endl;
 		string command;
 		while (true)
 		{
 			cin >> command;
-			if (command != "log_in" and command != "sign_up") {
+			if (command != "log_in" and command != "sign_up" and command != "exit") {
 				cout << "wrong command, retype: " << endl;
 			}
 			else break;
@@ -52,12 +52,18 @@ void ENTER()
 			cin >> login;
 			cout << "Enter password: " << endl;
 			cin >> passw;
-			if (LIST.account_verification(login, passw))
+			int j = LIST.account_verification(login, passw);
+			if (j==-1)
 			{
 				break;
 			}
-			else cout << "Account not found" << endl;
+			else {
+				cout << "Account not found" << endl;
+				return j;
+			}
 		}
+
+		if (command == "exit") return -1;
 
 	}
 }
@@ -69,7 +75,9 @@ int main()
 	while (true)
 	{
 		bool exit = 0;
-		ENTER();//добавить выход из программы
+		int ent = ENTER();
+		if (ent==-1) return 0;
+		User* current_user_login=LIST._List[ent];
 		while (true)
 		{
 			int command;
@@ -83,9 +91,11 @@ int main()
 			case 3:
 				break;
 			case 4:
-				exit = 1;
 				break;
 			case 5:
+				exit = 1;
+				break;
+			case 6:
 				return 0;
 				break;
 
