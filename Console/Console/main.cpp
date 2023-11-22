@@ -3,6 +3,7 @@
 #include"User.h"
 using namespace std;
 ListUsers LIST;
+std::map < std::pair<std::string, std::string>, std::vector < std::pair<std::string, std::string> >> AllMessages;
 
 bool password_check(string passw) {
 	cout << "repeat the password again: ";
@@ -29,6 +30,7 @@ int ENTER()
 
 		if (command == "log_in") {
 			string passw, login, name;
+			cout << "(don't use spaces)" << endl;;
 			cout << "Create a login: ";
 			cin >> login;
 			cout << "Create a name: ";
@@ -136,6 +138,35 @@ void settings(User* current_user) {
 	}
 }
 
+void send_message(User* current_user) {
+	string login;
+	cout << "Enter the login of the person you want to send a message" << endl;
+	cin >> login;
+	int i = LIST.account_search(login);
+	if (i == -1) cout << "account not found "<< endl;
+	else {
+		cout << "Enter your message:" << endl;
+		string message;
+		getline(cin, message);
+		current_user->sendMessage(LIST._List[i],message);
+		AllMessages[{max(current_user->returnlogin(), LIST._List[i]->returnlogin()), min(current_user->returnlogin(), LIST._List[i]->returnlogin())}].push_back({ current_user->returnlogin(),message });
+	}
+}
+
+void send_message_all(User* current_user) {
+	cout << "Enter your message:" << endl;
+	string message;
+	getline(cin, message);
+	for (int i = 0; i < LIST._size; i++)
+	{
+		current_user->sendMessage(LIST._List[i], message);
+		AllMessages[{max(current_user->returnlogin(), LIST._List[i]->returnlogin()), min(current_user->returnlogin(), LIST._List[i]->returnlogin())}].push_back({ current_user->returnlogin(),message });
+	}
+}
+
+void show_all_correspondence() {
+
+}
 
 int main()
 {
@@ -148,23 +179,28 @@ int main()
 		while (true)
 		{
 			char command;
-			cout << "Enter the command: 1 - send message, 2 - check new messages, 3 - settings, 4 - list of users, 5 - log out of your account, 6 - exit" << endl;
+			cout << "Enter the command: 1 - send message, 2 - send message all, 3 - check new messages, 4 - settings, 5 - list of users, 6 - log out of your account, 7 - exit" << endl;
 			cin >> command;
 			switch (command) {
 			case '1':
+				send_message(current_user);
 				break;
 			case '2':
+				send_message_all(current_user);
 				break;
 			case '3':
-				settings(current_user);
+				check_new_messages();
 				break;
 			case '4':
-				list_of_users();
+				settings(current_user);
 				break;
 			case '5':
-				exit = 1;
+				list_of_users();
 				break;
 			case '6':
+				exit = 1;
+				break;
+			case '7':
 				return 0;
 				break;
 

@@ -24,12 +24,18 @@
     <ClCompile Include="ListUsers.cpp">
       <Filter>Файлы ресурсов</Filter>
     </ClCompile>
+    <ClCompile Include="Messages.cpp">
+      <Filter>Файлы ресурсов</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="User.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="ListUsers.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Messages.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

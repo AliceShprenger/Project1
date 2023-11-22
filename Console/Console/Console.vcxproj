@@ -127,11 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Messages.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="ListUsers.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Messages.h" />
     <ClInclude Include="User.h" />
     <ClInclude Include="ListUsers.h" />
   </ItemGroup>

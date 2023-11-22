@@ -1,33 +1,41 @@
 #include"User.h"
 #include<iostream>
 #include<string>
-User::User(std::string password, std::string login, std::string name) :_login(login), _password(password),_name(name) {}
-std::string User::returnname()
+#include<map>
+using namespace std;
+User::User(string password, string login, string name) :_login(login), _password(password),_name(name) {}
+string User::returnname()
 {
 	return _name;
 }
-std::string User::returnlogin()
+string User::returnlogin()
 {
 	return _login;
 }
-std::string User::returnpassword()
+string User::returnpassword()
 {
 	return _password;
 }
 void User::information()
 {
-	std::cout <<"login: "<< _login << std::endl;
-	std::cout <<"name: "<< _name << std::endl;
+	cout <<"login: "<< _login << endl;
+	cout <<"name: "<< _name << endl;
 }
-void User::changelogin(std::string login)
+void User::changelogin(string login)
 {
 	_login = login;
 }
-void User::changename(std::string name)
+void User::changename(string name)
 {
 	_name = name;
 }
-void User::changepassword(std::string password)
+void User::changepassword(string password)
 {
 	_password = password;
 }
+void User::sendMessage(User* A,string message)
+{
+	A->_NewMessages.push_back({ this->_login,message });
+}
+
+

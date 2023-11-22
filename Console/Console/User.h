@@ -1,6 +1,7 @@
 #pragma once
+#include"Messages.h"
 #include <string>
-class User {
+class User:public Messages {
 private:
 	std::string _password;
 	std::string _login;
@@ -15,5 +16,5 @@ public:
 	void changename(std::string name);
 	void changepassword(std::string password);
 	void information();
-
+	void sendMessage(User* A,std::string message);
 };

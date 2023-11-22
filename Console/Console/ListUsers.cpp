@@ -37,6 +37,15 @@ int ListUsers::account_verification(string login, string password)
 	return -1;
 }
 
+int ListUsers::account_search(std::string login)
+{
+	for (int i = 0; i < _size; i++)
+	{
+		if (login == _List[i]->returnlogin()) return i;
+	}
+	return -1;
+}
+
 void ListUsers::register_(string passw, string login, string name)
 {
 	User* B=new User(passw, login, name);
