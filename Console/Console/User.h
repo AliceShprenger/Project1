@@ -12,9 +12,11 @@ public:
 	std::string returnname();
 	std::string returnlogin();
 	std::string returnpassword();
+	int returnsizeNewMes();
 	void changelogin(std::string login);
 	void changename(std::string name);
 	void changepassword(std::string password);
 	void information();
 	void sendMessage(User* A,std::string message);
+	void showNewMessage();
 };

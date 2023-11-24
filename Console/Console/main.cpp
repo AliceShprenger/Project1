@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <string>
 #include"ListUsers.h"
 #include"User.h"
 using namespace std;
@@ -147,7 +149,8 @@ void send_message(User* current_user) {
 	else {
 		cout << "Enter your message:" << endl;
 		string message;
-		getline(cin, message);
+		cin.get();
+		getline(cin,message);
 		current_user->sendMessage(LIST._List[i],message);
 		AllMessages[{max(current_user->returnlogin(), LIST._List[i]->returnlogin()), min(current_user->returnlogin(), LIST._List[i]->returnlogin())}].push_back({ current_user->returnlogin(),message });
 	}
@@ -156,6 +159,7 @@ void send_message(User* current_user) {
 void send_message_all(User* current_user) {
 	cout << "Enter your message:" << endl;
 	string message;
+	cin.get();
 	getline(cin, message);
 	for (int i = 0; i < LIST._size; i++)
 	{
@@ -164,10 +168,63 @@ void send_message_all(User* current_user) {
 	}
 }
 
-void show_all_correspondence() {
-
+void show_all_correspondence(User* current_user) {
+	string login;
+	cout <<"enter user login: "<< endl;
+	cin>> login;
+	int i = LIST.account_search(login);
+	if (i == -1) cout << "user is not found" << endl;
+	else {
+		int SIZE= AllMessages[{max(current_user->returnlogin(), LIST._List[i]->returnlogin()), min(current_user->returnlogin(), LIST._List[i]->returnlogin())}].size();
+		for (int j = 0; j < SIZE; j++)
+		{
+			cout << AllMessages[{max(current_user->returnlogin(), LIST._List[i]->returnlogin()), min(current_user->returnlogin(), LIST._List[i]->returnlogin())}][j].first << ":  " << AllMessages[{max(current_user->returnlogin(), LIST._List[i]->returnlogin()), min(current_user->returnlogin(), LIST._List[i]->returnlogin())}][j].second << endl;
+		}
+	}
 }
 
+void show_new_messages(User* current_user) {
+	while (true) {
+		cout << "you have " << current_user->returnsizeNewMes() << " new messages" << endl;
+		char command;
+		cout << "Enter the command: 1 - show new message, 2 - come back" << endl;
+		cin >> command;
+		switch (command) {
+		case '1':
+			current_user->showNewMessage();
+			break;
+		case '2':
+			return;
+			break;
+		default:
+			cout << "invalid command" << endl;
+			break;
+		}
+	}
+}
+
+
+void check_messages(User* current_user) {
+	while (true) {
+		char command;
+		cout << "Enter the command: 1 - show new messages, 2 - show all correspondence with the user, 3 - come back" << endl;
+		cin >> command;
+		switch (command) {
+		case '1':
+			show_new_messages(current_user);
+			break;
+		case '2':
+			show_all_correspondence(current_user);
+			break;
+		case '3':
+			return;
+			break;
+		default:
+			cout << "invalid command" << endl;
+			break;
+		}
+	}
+}
 int main()
 {
 	while (true)
@@ -179,7 +236,7 @@ int main()
 		while (true)
 		{
 			char command;
-			cout << "Enter the command: 1 - send message, 2 - send message all, 3 - check new messages, 4 - settings, 5 - list of users, 6 - log out of your account, 7 - exit" << endl;
+			cout << "Enter the command: 1 - send message, 2 - send message all, 3 - check messages, 4 - settings, 5 - list of users, 6 - log out of your account, 7 - exit" << endl;
 			cin >> command;
 			switch (command) {
 			case '1':
@@ -189,7 +246,7 @@ int main()
 				send_message_all(current_user);
 				break;
 			case '3':
-				check_new_messages();
+				check_messages(current_user);
 				break;
 			case '4':
 				settings(current_user);

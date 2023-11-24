@@ -16,6 +16,10 @@ string User::returnpassword()
 {
 	return _password;
 }
+int User::returnsizeNewMes()
+{
+	return _sizeNewMes;
+}
 void User::information()
 {
 	cout <<"login: "<< _login << endl;
@@ -36,6 +40,17 @@ void User::changepassword(string password)
 void User::sendMessage(User* A,string message)
 {
 	A->_NewMessages.push_back({ this->_login,message });
+	A->_sizeNewMes++;
+}
+
+void User::showNewMessage()
+{
+	if (_sizeNewMes == 0) cout << "you have no new messages" << endl;
+	else {
+		cout << _NewMessages[0].first << ":  " << _NewMessages[0].second << endl;
+		_NewMessages.erase(_NewMessages.begin());
+		_sizeNewMes--;
+	}
 }
 
 
