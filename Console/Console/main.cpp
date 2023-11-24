@@ -123,8 +123,16 @@ void settings(User* current_user) {
 		case '2':
 			cout << "Enter a new login: " ;
 			cin >> newlogin;
-			current_user->changelogin(newlogin);
-			cout << "login changed" << endl;
+			if (Alllogins.find(newlogin) != Alllogins.end())
+			{
+				cout << "login is already in use" << endl;
+			}
+			else {
+				Alllogins.erase(current_user->returnlogin());
+				Alllogins.insert(newlogin);
+				current_user->changelogin(newlogin);
+				cout << "login changed" << endl;
+			}
 			break;
 		case '3':
 			cout << "Enter a new name: ";
