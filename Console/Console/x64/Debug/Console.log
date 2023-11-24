@@ -1,3 +1,3 @@
 ﻿  main.cpp
-C:\Users\alice\ProjectGitHub\Project1\Console\Console\main.cpp(178,11): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\alice\ProjectGitHub\Project1\Console\Console\main.cpp(193,11): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
   Console.vcxproj -> C:\Users\alice\ProjectGitHub\Project1\Console\x64\Debug\Console.exe

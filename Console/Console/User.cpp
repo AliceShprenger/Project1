@@ -4,23 +4,23 @@
 #include<map>
 using namespace std;
 User::User(string password, string login, string name) :_login(login), _password(password),_name(name) {}
-string User::returnname()
+string User::returnname() const
 {
 	return _name;
 }
-string User::returnlogin()
+string User::returnlogin()const
 {
 	return _login;
 }
-string User::returnpassword()
+string User::returnpassword()const
 {
 	return _password;
 }
-int User::returnsizeNewMes()
+int User::returnsizeNewMes()const
 {
 	return _sizeNewMes;
 }
-void User::information()
+void User::information()const
 {
 	cout <<"login: "<< _login << endl;
 	cout <<"name: "<< _name << endl;

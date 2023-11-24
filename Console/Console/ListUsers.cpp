@@ -21,14 +21,14 @@ void ListUsers::sortListlogin()
 	sort(_List.begin(), _List.end(), Listcomparelogin);
 }
 
-void ListUsers::show()
+void ListUsers::show()const
 {
 	for (int i = 0; i < _size; i++) {
 		cout << _List[i]->returnname() << "   " << _List[i]->returnlogin() << endl;
 	}
 }
 
-int ListUsers::account_verification(string login, string password)
+int ListUsers::account_verification(string login, string password)const
 {
 	for (int i = 0; i < _size; i++)
 	{
@@ -37,7 +37,7 @@ int ListUsers::account_verification(string login, string password)
 	return -1;
 }
 
-int ListUsers::account_search(std::string login)
+int ListUsers::account_search(std::string login)const
 {
 	for (int i = 0; i < _size; i++)
 	{

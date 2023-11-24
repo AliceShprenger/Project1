@@ -1,14 +1,15 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <set>
 #include"ListUsers.h"
 #include"User.h"
 using namespace std;
 ListUsers LIST;
-std::map < std::pair<std::string, std::string>, std::vector < std::pair<std::string, std::string> >> AllMessages;
-
+map < std::pair<std::string, std::string>, std::vector < std::pair<std::string, std::string> >> AllMessages;
+set<string>Alllogins;
 bool password_check(string passw) {
-	cout << "repeat the password again: ";
+	cout << "Repeat the password again: ";
 	string passw1;
 	cin >> passw1;
 	if (passw1 == passw) return 1;
@@ -25,7 +26,7 @@ int ENTER()
 		{
 			cin >> command;
 			if (command != "log_in" and command != "sign_up" and command != "exit") {
-				cout << "wrong command, retype: " << endl;
+				cout << "wrong command, retype: ";
 			}
 			else break;
 		}
@@ -35,31 +36,45 @@ int ENTER()
 			cout << "(don't use spaces)" << endl;;
 			cout << "Create a login: ";
 			cin >> login;
-			cout << "Create a name: ";
-			cin >> name;
-			cout << "Create a password: ";
-			cin >> passw;
-			if (password_check(passw))
+			if (Alllogins.find(login) != Alllogins.end())
 			{
-				LIST.register_(passw, login, name);
-				cout << "Account created" << endl;
+				cout<<"login is already in use"<< endl;
 			}
-			else cout << "Account not created" << endl;
+			else {
+				cout << "Create a name: ";
+				cin >> name;
+				cout << "Create a password: ";
+				cin >> passw;
+				if (password_check(passw))
+				{
+					Alllogins.insert(login);
+					LIST.register_(passw, login, name);
+					cout << "Account created" << endl;
+				}
+				else cout << "Account not created" << endl;
+			}
 		}
 
 		if (command == "sign_up") {
 			string passw, login;
 			cout << "Enter login: ";
 			cin >> login;
-			cout << "Enter password: ";
-			cin >> passw;
-			int j = LIST.account_verification(login, passw);
-			if (j==-1)
+			if (Alllogins.find(login) == Alllogins.end())
 			{
-				cout << "Account not found" << endl;
+				cout << "account not found" << endl;
+
 			}
 			else {
-				return j;
+				cout << "Enter password: ";
+				cin >> passw;
+				int j = LIST.account_verification(login, passw);
+				if (j == -1)
+				{
+					cout << "wrong password" << endl;
+				}
+				else {
+					return j;
+				}
 			}
 		}
 
@@ -142,7 +157,7 @@ void settings(User* current_user) {
 
 void send_message(User* current_user) {
 	string login;
-	cout << "Enter the login of the person you want to send a message" << endl;
+	cout << "Enter the login of the person you want to send a message: " ;
 	cin >> login;
 	int i = LIST.account_search(login);
 	if (i == -1) cout << "account not found "<< endl;
@@ -170,7 +185,7 @@ void send_message_all(User* current_user) {
 
 void show_all_correspondence(User* current_user) {
 	string login;
-	cout <<"enter user login: "<< endl;
+	cout <<"Enter user login: ";
 	cin>> login;
 	int i = LIST.account_search(login);
 	if (i == -1) cout << "user is not found" << endl;
@@ -185,7 +200,7 @@ void show_all_correspondence(User* current_user) {
 
 void show_new_messages(User* current_user) {
 	while (true) {
-		cout << "you have " << current_user->returnsizeNewMes() << " new messages" << endl;
+		cout << "You have " << current_user->returnsizeNewMes() << " new messages" << endl;
 		char command;
 		cout << "Enter the command: 1 - show new message, 2 - come back" << endl;
 		cin >> command;
@@ -268,6 +283,5 @@ int main()
 			if (exit) break;
 		}
 	}
-	return 0;//добавить конст после функций, сделать,чтобы логины не повтор€лись, сделатьЅчтобы при входе различались ошибки
-	//ввода парол€ и существовани€ аккаунта
+	return 0;
 }
